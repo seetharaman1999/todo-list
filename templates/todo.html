@@ -1,0 +1,88 @@
+<html>
+<head>
+<style media="screen">
+body
+{
+  margin:70px;
+  background-image: linear-gradient(to bottom, #051937, #004068, #006b87, #009689, #00bf72, #01cd7c, #01db87, #00ea92, #00e1ce, #00d2f4, #10befb, #86a8e7);
+}
+h1
+{
+  color:#fff;
+  font-family: montserrat;
+  font-size:30px;
+  font-weight: bolder;
+}
+ul
+{
+  list-style-type: none;
+}
+li::before 
+{
+ content: "\2022";
+ color: #fff; 
+ font-weight: bold; 
+ display: inline-block;
+ width: 1em;
+}
+li
+{
+    font-size: 25px;
+    font-family: montserrat;
+    color:#fff;
+}
+input[type=text]
+{
+    font-family: montserrat;
+    width: 20%;
+    height: 7%;
+    padding: 10px 14px;
+    margin: 3px 0;
+    border-radius: 30px;
+    border-bottom-style: none;
+}
+input[type=submit]
+{
+  font-family: montserrat;
+  width:10%;
+  background-color:#051937;
+  color: #fff;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 30px;
+}
+form
+{
+	display: inline;
+}
+a:hover
+{
+	opacity: 0.9;	
+}
+</style>
+</head>
+<body>
+<h1>TODO</h1>
+
+<ul>
+
+
+   {% for todo_item in all_items %}
+	<li>
+		{{todo_item.content}} <span>&nbsp&nbsp</span>
+        	<form action="/deleteTodo/{{todo_item.id}}/" method="post">{% csrf_token %}
+          	<a><input type="submit" value="delete"></a>
+    </li>
+        	</form>
+
+        {% endfor %}
+</ul>
+
+<form action="/addTodo/" method="post">{% csrf_token %}
+  <input type="text" name="content" placeholder="Todo" required>
+ <a><input type="submit" value="add"></a>
+
+</form>
+</body>
+</html>
